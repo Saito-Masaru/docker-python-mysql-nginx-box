@@ -24,7 +24,7 @@ PRETTY_NAME="Ubuntu 22.04.4 LTS"
  $ docker --version
 Docker version 27.1.1, build 6312585
 
-n $ docker-compose --version
+$ docker-compose --version
 Docker Compose version v2.29.1-desktop.1
 ```
 
@@ -32,6 +32,7 @@ Docker Compose version v2.29.1-desktop.1
 
 ## ファイル構成
 
+```
  $ tree
 .
 |-- /app
@@ -56,6 +57,7 @@ Docker Compose version v2.29.1-desktop.1
     |-- /css
     |-- /img/
     `-- /js
+```
 
 
 ## ファイルとディレクトリの説明
@@ -126,6 +128,7 @@ nginx 1.20
 ## 起動手順
 
 1. `.env_example` を　`.env` にコピーして内容を適切に編集してください。
+    * `cp .env_example .env` `vi .env`
     * mysqlコンテナに作るDB情報、接続port、ユーザー、パスワードなどを設定します。
 1. 適宜docker-comppose.ymlやdocker/* の設定ファイルを編集します。
 1. `docker-compose up -d` と入力してenterキーを押すとコンテナの取得ビルドを自動で行い終了後に利用可能となります。
@@ -135,7 +138,7 @@ nginx 1.20
 mysqlについて  
 https://qiita.com/ucan-lab/items/b094dbfc12ac1cbee8cb
 
-pythonについて
+pythonについて  
 https://qiita.com/syo_engineer/items/5f31f25cb50400b94b1d
 
 以上
