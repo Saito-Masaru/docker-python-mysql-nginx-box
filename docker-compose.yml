@@ -1,0 +1,49 @@
+version: "3"
+services:
+
+  python:
+    container_name: python
+    image: python3.10
+    build: docker/python
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./data:/data
+      - ./html:/html
+    ports:
+      - "5000:5000"
+    tty: true
+
+  nginx:
+    container_name: nginx
+    image: nginx:1.20
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./data:/data
+      - ./static:/usr/share/nginx/static
+      - ./html:/usr/share/nginx/html
+      - ./log/nginx:/var/log/nginx
+    ports:
+      - "8000:80"
+    tty: true
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./log/mysql:/var/log/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./data:/data
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - TZ=${TZ}
+    ports:
+      - 3306:${DB_PORT}
+
+volumes:
+  mysql-data:
+
