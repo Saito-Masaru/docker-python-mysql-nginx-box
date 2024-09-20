@@ -127,11 +127,15 @@ nginx 1.20
 
 ## 起動手順
 
-1. `.env_example` を　`.env` にコピーして内容を適切に編集してください。
-    * `cp .env_example .env` `vi .env`
+1. `.env_example` を　`.env` にコピーします。
+    * `cp .env_example .env` 
+1. コピーした `.env` を編集します。
     * mysqlコンテナに作るDB情報、接続port、ユーザー、パスワードなどを設定します。
+    * `vi .env`
 1. 適宜docker-comppose.ymlやdocker/* の設定ファイルを編集します。
 1. `docker-compose up -d` と入力してenterキーを押すとコンテナの取得ビルドを自動で行い終了後に利用可能となります。
+
+※初回以外は `docker-compose up -d` と `docker-compose down` で問題ありません。
 
 ## 参考にしたページ
 
