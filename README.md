@@ -102,12 +102,12 @@ flaskのエンドポイント
 | /db  | mysqlのtestテーブルの内容を出力する。<br>testテーブルがない場合は500エラーとなる。 |
 
 port: 5000  
-PCから `http://localhost:5000` にアクセスすると上記flaskにアクセス可能。
+ホストPCから `http://localhost:5000` にアクセスすると上記flaskにアクセス可能。
 
 〇mysql  
 mysql 8.0.39  
 システムで使っている以外の初期detabaseやuser,portなどを `.env_example` をコピーして `.env` ファイルを作ってからビルドする必要があります。(後述)  
-3306ポートでPC側のmysqlクライアントで接続可能です。(docker-compose.ymlファイルで変更可能)  
+3306ポートでホストPC側のmysqlクライアントで接続可能です。(docker-compose.ymlファイルで変更可能)  
 手元にdumpファイルがある場合は以下の手順でインポート可能です。
 
 1. /data以下にダンプファイルを設置(/data/db.dumpとする)
@@ -122,8 +122,8 @@ mysql 8.0.39
 mysqlコンテナとは別に `mysql-data` というvolumeを設定しておりコンテナをリビルドしてもデータは失われません。
 
 
-〇nginx
-nginx 1.20
+〇nginx  
+nginx 1.20  
 
 設定済みのエンドポイントは以下の通り
 
@@ -135,6 +135,8 @@ nginx 1.20
 | /img | /static/img マウントポイント:/usr/share/nginx/static/img |
 | /app | pythonコンテナの5000晩poert(flask) リバースproxyにて接続 |
 
+port: 8000  
+ホストPCから `http://localhost:8000` にアクセスすると上記skにアクセス可能。
 
 
 ## 起動手順
@@ -172,5 +174,5 @@ https://qiita.com/syo_engineer/items/5f31f25cb50400b94b1d
 以上
 
 
-___
+
 
