@@ -1,10 +1,14 @@
-# python + nginx + mysql のcocker環境
+# python + nginx + mysql のdocker環境
 
 ## 概要
 
-python3の実行環境と併せてmysqlおよびnginxの環境。
-pythonコンテナにはflaskをインストールしてnginxとの疎通を確認しておき、mysqlからのデータ取得もできることを確認しておく。
-ただし、基本コンセプトはpythonを利用してデータ文政結果を確認で来るための環境のみを用意しているので各環境は最低限の機能のみを設置している。
+python3の実行環境と併せてmysqlおよびnginxの環境。  
+pythonコンテナでデータ分析をして結果をHTMLでマークアップしたデータを作成してそれをnginxで閲覧できるようにして、  
+なおかつデータは何度も再利用可能な形でmysqlで保存と中間加工をすることを総手下環境。  
+
+pythonは実行環境として考えてはいるが一応WEBインターフェースとしてflaskをインストールした。  
+nginxで分析結果とflaskを通してpython環境への接続や今後の拡張の土台を用意する。  
+ただし、基本コンセプトはpythonを利用してデータ分析と結果を確認で来るための環境のみで各環境は最低限の機能のみを設置している。
 
 ## 確認環境
 
@@ -136,6 +140,18 @@ nginx 1.20
 1. `docker-compose up -d` と入力してenterキーを押すとコンテナの取得ビルドを自動で行い終了後に利用可能となります。
 
 ※初回以外は `docker-compose up -d` と `docker-compose down` で問題ありません。
+
+## 各コンテナへの入り方
+
+python: `docker exec -it python bash`
+
+nginx: `docker exec -it nginx bash`
+
+mysql:  
+  (shell): `docker exec -it mysql bash`  
+  (mysql db): `docker exec -it mysql -u[username] -p [dbname]`
+
+基本的に全てubuntuベースなので必要なパッケージなどはaptで追加可能。(リビルドしたら消えるので永続化する場合は適宜Dockerfileや再構築用のshell scriptなどを用意すること)  
 
 ## 参考にしたページ
 
